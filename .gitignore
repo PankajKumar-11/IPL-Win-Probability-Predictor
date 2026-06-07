@@ -1,0 +1,22 @@
+# Virtual environment
+.venv/
+venv/
+ENV/
+
+# Python caching
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Raw data (very large, generated via script)
+data/raw/
+data/ipl_json.zip
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+.ipynb_checkpoints
+
+# IDE configurations
+.vscode/settings.json
+.vscode/
