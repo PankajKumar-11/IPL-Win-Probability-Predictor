@@ -298,10 +298,11 @@ def render_shap_explanation(xgb_model, model_cols):
     filtered_contribs = filtered_contribs.sort_values(by='Abs_SHAP', ascending=True)
     
     colors = ['#2ecc71' if x >= 0 else '#ff4d4d' for x in filtered_contribs['SHAP_Value']]
-    hover_texts = [
-        f"<b>{row['Feature']}</b><br>Value: {row['Value']:.1f if isinstance(row['Value'], float) else row['Value']}<br>SHAP: {row['SHAP_Value']:.4f}"
-        for _, row in filtered_contribs.iterrows()
-    ]
+    hover_texts = []
+    for _, row in filtered_contribs.iterrows():
+        val = row['Value']
+        val_str = f"{val:.1f}" if isinstance(val, (float, np.floating)) else str(val)
+        hover_texts.append(f"<b>{row['Feature']}</b><br>Value: {val_str}<br>SHAP: {row['SHAP_Value']:.4f}")
         
     fig = go.Figure(go.Bar(
         x=filtered_contribs['SHAP_Value'], y=filtered_contribs['Feature'],
